@@ -1,0 +1,132 @@
+def show_hangman(choice):
+    hangman = [
+        """
+        ||=====
+        ||    |
+        ||   \O/
+        ||    |
+        ||   / \\
+        ||    
+        """,
+        """
+        ||=====
+        ||    |
+        ||   \O/
+        ||    |
+        ||   / 
+        ||    
+        """,
+        """
+        ||=====
+        ||    |
+        ||   \O/
+        ||    |
+        ||     
+        ||    
+        """,
+        """
+        ||=====
+        ||    |
+        ||   \O/
+        ||     
+        ||     
+        ||    
+        """,
+        """
+        ||=====
+        ||    |
+        ||    O 
+        ||     
+        ||     
+        ||    
+        """,
+        """
+        ||=====
+        ||    |
+        ||     
+        ||     
+        ||     
+        ||    
+        """,
+        """
+        ||=====
+        ||    
+        ||     
+        ||     
+        ||     
+        ||
+        """
+    ]
+    hangman=hangman[::-1]
+    print(hangman[choice])
+
+def hangman():
+    print("\n\n Enter any word in lowercase and hit >>ENTER<<")
+    print("\n\n\t  ")
+    hangman_word = input(" Enter HERE ==>")
+    temp_word = ['_'] * len(hangman_word)
+    hangman_output = ['_'] * len(hangman_word)
+    wrong_try = 6
+    length = len(hangman_word)
+
+    
+  
+
+    print("\n\n Now give the COMPUTER to your friend and see if he/she can CRACK it!!!")
+    print("\n\n\tHIT >>ENTER<<")
+    print("\n\n !!!!!!!!!!!!!!!!!!!Welcome to the HANGMAN GAME!!!!!!!!!!!!!!!!!\n\n\n")
+    print("\n\n You will get 5 chances to guess the right word")
+    print("\n\n  GET...SET...GO..!!")
+    print("\n\n\tHIT >>ENTER<< ")
+    print("\n\t||===== ")
+    print("\n\t||    | ")
+    print("\n\t||      ")
+    print("\n\t||      ")
+    print("\n\t||      ")
+    print("\n\t||      ")
+
+    print("\n\n     The word has", length, "alphabets \n\n")
+
+    for i in range(length):
+        hangman_output[i] = '_'
+
+    while wrong_try != 0:
+        match_found = False
+        print("\n\n   Enter any alphabet from 'a' to 'z' and please use lowercase!!")
+        print("\n\n\t Enter HERE ==> ")
+        alphabet_from_user = input().lower()
+
+        if len(alphabet_from_user) != 1 or not alphabet_from_user.isalpha() or alphabet_from_user < 'a' or alphabet_from_user > 'z':
+            print("\n\t Wrong input. TRY AGAIN")
+            continue
+
+        if alphabet_from_user in hangman_word:
+            match_found = True
+            for counter in range(length):
+                if alphabet_from_user == hangman_word[counter]:
+                    temp_word[counter] = alphabet_from_user
+
+        if not match_found:
+            wrong_try -= 1
+            print("\n\t :( You have", wrong_try, "tries left")
+            show_hangman(6 - wrong_try)
+
+        else:
+            for i in range(length):
+                hangman_output[i] = temp_word[i]
+
+            print(" ".join(hangman_output))
+
+            if '_' not in hangman_output:
+                print("\n\n\t \t YAHOO!!!!! You are the WINNER !!!!!")
+                print("\n\n\t The Word was", hangman_word)
+                print("\n\n\n\n\t\tEASY HUH???\n\n")
+                return
+
+    if wrong_try <= 0:
+        print("\n\n\t The Word was", hangman_word)
+        print("\n\n\t You Are In Hell Now!!!!!")
+        print("\n\n\t See You in next life!!!")
+
+
+hangman()
